@@ -3,8 +3,8 @@ import { useApp } from '../store'
 import { CARATULA } from '../data/project'
 
 const LINEAS = [
-  { id: 'alcaldia' as const, label: 'ALCALDÍA', sub: 'Sistema modular' },
-  { id: 'ferro' as const, label: 'FERROCARRILES', sub: 'Vagones y componentes' },
+  { id: 'ferro' as const, label: 'FERROVIARIO', sub: 'Vagones y componentes' },
+  { id: 'alcaldia' as const, label: 'CÁRCELES', sub: 'Sistema modular' },
 ]
 
 export default function Nav() {
@@ -17,7 +17,9 @@ export default function Nav() {
 
   return (
     <nav className="nav">
-      <button className="nav-marca" onClick={() => irA(0)} style={{ textAlign: 'left', width: '100%' }}>
+      <button className="nav-marca" onClick={() => setLinea(null)}
+        title="Volver a la pantalla de inicio" style={{ textAlign: 'left', width: '100%' }}>
+        <div className="volver">← INICIO</div>
         <div className="t">MJ COMERCIAL</div>
         <div className="s">{linea === 'ferro' ? 'LÍNEA FERROVIARIA' : CARATULA.utilizacion}</div>
       </button>

@@ -12,6 +12,7 @@ import Instalaciones from './sections/Instalaciones'
 import Detalles from './sections/Detalles'
 import Modelo from './sections/Modelo'
 import Documentacion from './sections/Documentacion'
+import Entrada from './sections/Entrada'
 import PortadaFerro from './sections/ferro/PortadaFerro'
 import Vagones from './sections/ferro/Vagones'
 import Componentes from './sections/ferro/Componentes'
@@ -45,6 +46,19 @@ export default function App() {
     window.addEventListener('keydown', h)
     return () => window.removeEventListener('keydown', h)
   }, [seccion, irA, presentando, lista.length])
+
+  /* Sin línea elegida se muestra la pantalla de acceso, sin barra lateral. */
+  if (linea === null) {
+    return (
+      <>
+        <Loader />
+        <main className="main" style={{ position: 'fixed', inset: 0 }}>
+          <Entrada />
+        </main>
+        <DocModal />
+      </>
+    )
+  }
 
   return (
     <>

@@ -30,10 +30,13 @@ export const PRESETS_CORTE: { id: PresetCorte; label: string; desc: string }[] =
 ]
 
 export type Linea = 'alcaldia' | 'ferro'
+/** null = pantalla de entrada, todavía sin línea elegida */
+export type LineaElegida = Linea | null
 
 interface Estado {
-  linea: Linea
-  setLinea: (l: Linea) => void
+  /** null mientras el visitante no eligió línea: se muestra la portada de acceso. */
+  linea: LineaElegida
+  setLinea: (l: LineaElegida) => void
 
   seccion: number
   irA: (n: number) => void
@@ -93,8 +96,8 @@ const capasIniciales = Object.fromEntries(
 const instIniciales = Object.fromEntries(INSTALACIONES.map((i) => [i.id, false]))
 
 export const useApp = create<Estado>((set, get) => ({
-  linea: 'alcaldia',
-  setLinea: (l) => set({ linea: l, seccion: 0, seleccion: null }),
+  linea: null,
+  setLinea: (l) => set({ linea: l, seccion: 0, seleccion: null, presentando: false }),
 
   seccion: 0,
   irA: (n) => set({ seccion: n, seleccion: null }),
