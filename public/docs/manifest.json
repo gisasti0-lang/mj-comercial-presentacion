@@ -1,0 +1,62 @@
+{
+ "lamina-completa": {
+  "file": "/docs/lamina-completa.png",
+  "w": 4200,
+  "h": 2967
+ },
+ "planta": {
+  "file": "/docs/planta.png",
+  "w": 1501,
+  "h": 2393
+ },
+ "elev-transversal": {
+  "file": "/docs/elev-transversal.png",
+  "w": 2001,
+  "h": 1146
+ },
+ "elev-longitudinal": {
+  "file": "/docs/elev-longitudinal.png",
+  "w": 2601,
+  "h": 768
+ },
+ "elev-frontal": {
+  "file": "/docs/elev-frontal.png",
+  "w": 1901,
+  "h": 967
+ },
+ "seccion-bb": {
+  "file": "/docs/seccion-bb.png",
+  "w": 1501,
+  "h": 1342
+ },
+ "iso-celaduria": {
+  "file": "/docs/iso-celaduria.png",
+  "w": 2001,
+  "h": 1543
+ },
+ "iso-porton": {
+  "file": "/docs/iso-porton.png",
+  "w": 2001,
+  "h": 1572
+ },
+ "det-muros": {
+  "file": "/docs/det-muros.png",
+  "w": 1701,
+  "h": 685
+ },
+ "det-pisos": {
+  "file": "/docs/det-pisos.png",
+  "w": 1701,
+  "h": 681
+ },
+ "det-techo": {
+  "file": "/docs/det-techo.png",
+  "w": 1701,
+  "h": 654
+ },
+ "rotulo": {
+  "file": "/docs/rotulo.png",
+  "w": 1401,
+  "h": 433
+ }
+}
