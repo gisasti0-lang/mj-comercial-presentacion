@@ -1,4 +1,5 @@
 import { useApp } from '../store'
+import { ruta } from '../data/ruta'
 import { CAPACIDAD } from '../data/ferrocarriles'
 
 /** Pantalla de acceso: se elige la línea antes de entrar a la presentación. */
@@ -33,9 +34,15 @@ export default function Entrada() {
       <header className="entrada-head entra">
         <div className="eyebrow">MJ COMERCIAL S.A. · MARÍA JUANA, SANTA FE</div>
         <h1>Presentación de proyectos<br />de alta complejidad</h1>
+        <p className="entrada-lead">
+          Dos verticales de negocio sostenidos por la misma ingeniería: <b>material rodante
+          ferroviario</b> y <b>módulos penitenciarios de acero</b>.
+        </p>
         <p>
-          Documentación técnica interactiva con modelos tridimensionales navegables,
-          construida sobre los planos y las especificaciones de cada proyecto.
+          Setenta años fabricando en serie y a medida, bajo normas AAR y con planta de conexión
+          ferroviaria propia. Cada proyecto se presenta acá con su documentación técnica y un
+          modelo tridimensional que se recorre, se despieza y se corta —construido sobre las
+          cotas de los planos, no sobre aproximaciones.
         </p>
       </header>
 
@@ -43,7 +50,7 @@ export default function Entrada() {
         {LINEAS.map((l) => (
           <button key={l.id} className="acceso" onClick={() => setLinea(l.id)}>
             <div className="acceso-img">
-              <img src={l.imagen} alt={l.titulo} />
+              <img src={ruta(l.imagen)} alt={l.titulo} loading="lazy" />
             </div>
             <div className="acceso-cuerpo">
               <div className="n">{l.n}</div>

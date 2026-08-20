@@ -28,21 +28,41 @@ export default function Loader() {
 
   return (
     <div className={`loader${cargado ? ' off' : ''}`} aria-hidden={cargado}>
-      {/* sección transversal esquemática: 3000 + 3000 + 3000, techo superior sobre patio */}
-      <svg className="loader-svg" viewBox="0 0 380 150" fill="none">
+      {/* Los dos verticales, dibujados con el mismo trazo: sección
+          transversal de la alcaldía y elevación de un vagón de carga. */}
+      <svg className="loader-svg" viewBox="0 0 380 232" fill="none">
         <g style={{ ['--len' as string]: 900 }}>
-          <line x1="20" y1="128" x2="360" y2="128" style={{ animationDelay: '0s' }} />
-          <rect x="20" y="66" width="113" height="62" style={{ animationDelay: '.12s' }} />
-          <rect x="133" y="66" width="114" height="62" style={{ animationDelay: '.24s' }} />
-          <rect x="247" y="66" width="113" height="62" style={{ animationDelay: '.36s' }} />
-          <path d="M14 66 L133 58" style={{ animationDelay: '.5s' }} />
-          <path d="M366 66 L247 58" style={{ animationDelay: '.5s' }} />
-          <path d="M133 46 L133 58 M247 46 L247 58" style={{ animationDelay: '.64s' }} />
-          <path d="M124 46 L190 30 L256 46" style={{ animationDelay: '.78s' }} />
-          <path d="M150 46 L150 58 M170 46 L170 58 M190 46 L190 58 M210 46 L210 58 M230 46 L230 58"
-            style={{ animationDelay: '.92s' }} />
-          <path d="M40 128 L40 138 M100 128 L100 138 M280 128 L280 138 M340 128 L340 138"
-            style={{ animationDelay: '1.02s' }} />
+          {/* ── alcaldía: sección transversal ── */}
+          <line x1="20" y1="104" x2="360" y2="104" style={{ animationDelay: '0s' }} />
+          <rect x="20" y="42" width="113" height="62" style={{ animationDelay: '.10s' }} />
+          <rect x="133" y="42" width="114" height="62" style={{ animationDelay: '.20s' }} />
+          <rect x="247" y="42" width="113" height="62" style={{ animationDelay: '.30s' }} />
+          <path d="M14 42 L133 34" style={{ animationDelay: '.42s' }} />
+          <path d="M366 42 L247 34" style={{ animationDelay: '.42s' }} />
+          <path d="M133 22 L133 34 M247 22 L247 34" style={{ animationDelay: '.54s' }} />
+          <path d="M124 22 L190 6 L256 22" style={{ animationDelay: '.66s' }} />
+          <path d="M150 22 L150 34 M170 22 L170 34 M190 22 L190 34 M210 22 L210 34 M230 22 L230 34"
+            style={{ animationDelay: '.78s' }} />
+          <path d="M40 104 L40 114 M100 104 L100 114 M280 104 L280 114 M340 104 L340 114"
+            style={{ animationDelay: '.88s' }} />
+
+          {/* ── ferroviario: elevación de vagón ── */}
+          <line x1="20" y1="212" x2="360" y2="212" style={{ animationDelay: '.98s' }} />
+          <rect x="46" y="146" width="288" height="46" style={{ animationDelay: '1.06s' }} />
+          <path d="M40 146 L340 146" style={{ animationDelay: '1.16s' }} />
+          <path d="M76 146 L76 192 M124 146 L124 192 M172 146 L172 192 M220 146 L220 192 M268 146 L268 192 M304 146 L304 192"
+            style={{ animationDelay: '1.24s' }} />
+          <path d="M46 192 L334 192" style={{ animationDelay: '1.32s' }} />
+          {/* bogies */}
+          <path d="M72 192 L72 200 M132 192 L132 200 M248 192 L248 200 M308 192 L308 200"
+            style={{ animationDelay: '1.40s' }} />
+          <path d="M66 200 L138 200 M242 200 L314 200" style={{ animationDelay: '1.46s' }} />
+          <circle cx="84" cy="206" r="6" style={{ ['--len' as string]: 40, animationDelay: '1.54s' }} />
+          <circle cx="120" cy="206" r="6" style={{ ['--len' as string]: 40, animationDelay: '1.58s' }} />
+          <circle cx="260" cy="206" r="6" style={{ ['--len' as string]: 40, animationDelay: '1.62s' }} />
+          <circle cx="296" cy="206" r="6" style={{ ['--len' as string]: 40, animationDelay: '1.66s' }} />
+          {/* enganches */}
+          <path d="M46 176 L32 176 M334 176 L348 176" style={{ animationDelay: '1.72s' }} />
         </g>
       </svg>
 
@@ -59,10 +79,6 @@ export default function Loader() {
         </div>
       </div>
 
-      <div className="loader-tit">
-        <div className="a">ALCALDÍA PENITENCIARIA</div>
-        <div className="b">MODULAR STEEL SYSTEM</div>
-      </div>
     </div>
   )
 }
