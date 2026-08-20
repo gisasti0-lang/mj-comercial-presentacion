@@ -15,7 +15,11 @@ const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t 
  *  La documentación declara la plataforma apta para dos contenedores ISO
  *  de 20′, y el CG35 mide 6000 mm entre cabezales. */
 const PORTA = VAGONES_3D.find((v) => v.id === 'portacontenedor')!
-const DECK = PORTA.alto   // 1208 mm de plataforma sobre riel
+const DECK = PORTA.alto        // 1208 mm de plataforma sobre riel
+const LARGO_CG = 6000          // [cota] CG35 entre cabezales
+/* Dos unidades de 6000 mm entran en los 12416 del vagón; se reparten
+   simétricamente dejando una junta central. */
+const PASO = LARGO_CG / 2 + 60
 
 function Escena({ onModelo }: { onModelo: (m: ModeloCG35) => void }) {
   const gl = useThree((s) => s.gl)
@@ -23,6 +27,7 @@ function Escena({ onModelo }: { onModelo: (m: ModeloCG35) => void }) {
   const capas = useFerro((s) => s.capasCG)
   const explotado = useFerro((s) => s.explotadoCG)
   const sobreVagon = useFerro((s) => s.sobreVagon)
+  const dos = useFerro((s) => s.dosContenedores)
   const abiertas = useFerro((s) => s.compuertasAbiertas)
   const seleccionar = useFerro((s) => s.seleccionarCG)
   const [objetivo, setObjetivo] = useState<{ obj: THREE.Mesh } | null>(null)
@@ -34,13 +39,23 @@ function Escena({ onModelo }: { onModelo: (m: ModeloCG35) => void }) {
   const vagon = useMemo(() => construirVagon(PORTA, modelo.materiales), [modelo])
   useEffect(() => { vagon.root.visible = sobreVagon }, [vagon, sobreVagon])
 
-  /* Al montarlo, el contenedor sube hasta la plataforma. */
+  /* Segunda unidad: copia del mismo modelo, sólo para mostrar la
+     configuración de dos contenedores que declara el vagón. */
+  const segundo = useMemo(() => modelo.root.clone(true), [modelo])
+  useEffect(() => { segundo.visible = sobreVagon && dos }, [segundo, sobreVagon, dos])
+
   const alturaObjetivo = sobreVagon ? DECK * 0.001 : 0
+  const zObjetivo = sobreVagon && dos ? -PASO * 0.001 : 0
   useFrame((_, dt) => {
     const y = modelo.root.position.y
     if (Math.abs(y - alturaObjetivo) > 0.002) {
       modelo.root.position.y = y + (alturaObjetivo - y) * Math.min(1, dt * 3.4)
     }
+    const z = modelo.root.position.z
+    if (Math.abs(z - zObjetivo) > 0.002) {
+      modelo.root.position.z = z + (zObjetivo - z) * Math.min(1, dt * 3.4)
+    }
+    segundo.position.set(0, modelo.root.position.y, modelo.root.position.z + PASO * 0.002)
     /* Apertura de compuertas: giran sobre su bisagra. */
     const ang = abiertas ? 1.15 : 0
     for (const c of modelo.compuertas) {
@@ -107,6 +122,7 @@ function Escena({ onModelo }: { onModelo: (m: ModeloCG35) => void }) {
   return (
     <>
       <primitive object={modelo.root} />
+      <primitive object={segundo} />
       <primitive object={vagon.root} />
       <Contorno objetivo={objetivo} planos={planos} />
     </>
@@ -140,7 +156,7 @@ export default function VisorCG35() {
   const [modelo, setModelo] = useState<ModeloCG35 | null>(null)
   const sobreVagon = useFerro((s) => s.sobreVagon)
   /* Con el vagón, el conjunto pasa de 6 a 12,4 m: hay que abrir el encuadre. */
-  const R = (modelo?.radio ?? 4) * (sobreVagon ? 1.75 : 1)
+  const R = (modelo?.radio ?? 4) * (sobreVagon ? 1.85 : 1)
 
   return (
     <Canvas

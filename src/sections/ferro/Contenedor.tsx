@@ -32,6 +32,16 @@ export default function Contenedor() {
         <button className={`btn${f.sobreVagon ? ' on' : ''}`}
           onClick={() => f.setSobreVagon(!f.sobreVagon)}
           title="Monta el contenedor sobre el vagón portacontenedor">SOBRE VAGÓN</button>
+        {f.sobreVagon && (
+          <>
+            <button className={`btn${!f.dosContenedores ? ' on' : ''}`}
+              onClick={() => f.setDosContenedores(false)}
+              title="Una unidad sobre la plataforma">1 UNIDAD</button>
+            <button className={`btn${f.dosContenedores ? ' on' : ''}`}
+              onClick={() => f.setDosContenedores(true)}
+              title="Dos unidades ISO de 20′, según declara el vagón">2 UNIDADES</button>
+          </>
+        )}
         <button className={`btn${f.compuertasAbiertas ? ' on' : ''}`}
           onClick={() => f.setCompuertasAbiertas(!f.compuertasAbiertas)}
           title="Abre las compuertas inferiores de descarga">ABRIR COMPUERTAS</button>
@@ -39,7 +49,9 @@ export default function Contenedor() {
       {(f.sobreVagon || f.compuertasAbiertas) && (
         <p className="nota-modo">
           {f.sobreVagon
-            ? 'Transporte — el contenedor apoya sobre el vagón portacontenedor, que la documentación declara apto para dos unidades ISO de 20′.'
+            ? (f.dosContenedores
+                ? 'Transporte — dos unidades sobre el vagón portacontenedor: 2 × 6000 mm dentro de los 12416 mm entre cabezales. Es la configuración de dos contenedores ISO de 20′ que declara la documentación del vagón.'
+                : 'Transporte — una unidad sobre la plataforma. El vagón admite una segunda: sus 12416 mm entre cabezales alojan dos contenedores ISO de 20′.')
             : 'Descarga — las compuertas inferiores abren por gravedad. Se muestra sin vagón porque la descarga se hace sobre fosa; el mecanismo de apertura es representativo.'}
         </p>
       )}

@@ -26,6 +26,8 @@ interface EstadoFerro {
   setExplotadoCG: (v: boolean) => void
   sobreVagon: boolean
   setSobreVagon: (v: boolean) => void
+  dosContenedores: boolean
+  setDosContenedores: (v: boolean) => void
   compuertasAbiertas: boolean
   setCompuertasAbiertas: (v: boolean) => void
   seleccionCG: { nombre: string; categoria: string; espec?: string } | null
@@ -71,8 +73,10 @@ export const useFerro = create<EstadoFerro>((set) => ({
   setExplotadoCG: (v) => set({ explotadoCG: v }),
   /* Transporte y descarga se excluyen: con el contenedor apoyado sobre la
      plataforma, las hojas abrirían contra el piso del vagón. */
-  sobreVagon: false,
+  sobreVagon: true,
   setSobreVagon: (v) => set(v ? { sobreVagon: true, compuertasAbiertas: false } : { sobreVagon: false }),
+  dosContenedores: true,
+  setDosContenedores: (v) => set({ dosContenedores: v }),
   compuertasAbiertas: false,
   setCompuertasAbiertas: (v) => set(v ? { compuertasAbiertas: true, sobreVagon: false } : { compuertasAbiertas: false }),
   seleccionCG: null,
