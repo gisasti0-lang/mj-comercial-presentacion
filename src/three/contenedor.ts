@@ -43,6 +43,8 @@ export interface PiezaCG35 {
 
 export interface ModeloCG35 {
   root: THREE.Group
+  /** Hojas pivotantes de las bocas de descarga, para animar la apertura. */
+  compuertas: THREE.Group[]
   grupos: Record<CatCG35, THREE.Group>
   materiales: Materiales
   radio: number
@@ -164,15 +166,26 @@ export function construirCG35(materiales?: Materiales): ModeloCG35 {
   }
 
   /* ── Bocas de descarga — 3 a 2160 mm [cota] ──────────────────── */
+  const compuertas: THREE.Group[] = []
   for (const z of [-PASO_BOCAS, 0, PASO_BOCAS]) {
     add('DESCARGA', caja(840, H_SOLERA - 40, 700, 0, (H_SOLERA - 40) / 2 + 20, z, M.acero, {
       nombre: 'Boca de descarga', categoria: 'DESCARGA', origen: 'cota',
       espec: '3 bocas separadas 2160 mm entre ejes',
     }))
-    add('DESCARGA', caja(900, 60, 760, 0, 30, z, M.aceroClaro, {
-      nombre: 'Compuerta de descarga', categoria: 'DESCARGA', origen: 'medido',
-      espec: 'Descarga por gravedad con compuertas inferiores',
-    }))
+    /* Dos hojas por boca, con bisagra en los bordes. El plano indica descarga
+       por gravedad con compuertas inferiores, pero no acota el mecanismo:
+       la apertura es representativa. */
+    for (const lado of [-1, 1]) {
+      const pivote = new THREE.Group()
+      pivote.position.set(lado * 440 * S, 30 * S, z * S)
+      pivote.userData.lado = lado
+      pivote.add(caja(440, 46, 760, -lado * 220, 0, 0, M.aceroClaro, {
+        nombre: 'Compuerta de descarga', categoria: 'DESCARGA', origen: 'medido',
+        espec: 'Descarga por gravedad con compuertas inferiores. Mecanismo de apertura representativo.',
+      }))
+      grupos.DESCARGA.add(pivote)
+      compuertas.push(pivote)
+    }
   }
 
   /* ── Boca de carga — 5674 mm [cota] ──────────────────────────── */
@@ -225,7 +238,7 @@ export function construirCG35(materiales?: Materiales): ModeloCG35 {
   }
 
   return {
-    root, grupos, materiales: M,
+    root, grupos, materiales: M, compuertas,
     radio: Math.hypot(ENTRE_SOLERAS / 2, LARGO / 2, H_MAX) * S,
     dispose() {
       root.traverse((o) => { if (o instanceof THREE.Mesh) o.geometry.dispose() })

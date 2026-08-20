@@ -410,6 +410,9 @@ p{color:#b9c0c6;max-width:64ch}
   .lamina{overflow-x:auto}
 }
 
+.nota-modo{font-size:.78rem;color:var(--tenue);border-left:2px solid var(--acento);
+  padding:7px 0 7px 11px;margin:10px 0 0}
+
 /* Diseños de dos columnas: se apilan cuando no entran. */
 .dos-col{display:grid;gap:26px;align-items:start;
   grid-template-columns:minmax(0,1fr) minmax(270px,.38fr)}

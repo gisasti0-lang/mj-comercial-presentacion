@@ -29,7 +29,20 @@ export default function Contenedor() {
         ))}
         <button className={`btn${f.explotadoCG ? ' on' : ''}`}
           onClick={() => f.setExplotadoCG(!f.explotadoCG)}>EXPLODED VIEW</button>
+        <button className={`btn${f.sobreVagon ? ' on' : ''}`}
+          onClick={() => f.setSobreVagon(!f.sobreVagon)}
+          title="Monta el contenedor sobre el vagón portacontenedor">SOBRE VAGÓN</button>
+        <button className={`btn${f.compuertasAbiertas ? ' on' : ''}`}
+          onClick={() => f.setCompuertasAbiertas(!f.compuertasAbiertas)}
+          title="Abre las compuertas inferiores de descarga">ABRIR COMPUERTAS</button>
       </div>
+      {(f.sobreVagon || f.compuertasAbiertas) && (
+        <p className="nota-modo">
+          {f.sobreVagon
+            ? 'Transporte — el contenedor apoya sobre el vagón portacontenedor, que la documentación declara apto para dos unidades ISO de 20′.'
+            : 'Descarga — las compuertas inferiores abren por gravedad. Se muestra sin vagón porque la descarga se hace sobre fosa; el mecanismo de apertura es representativo.'}
+        </p>
+      )}
       <div style={{ marginBottom: 12 }}><ControlCorte /></div>
       {f.seleccionCG && (
         <div className="ficha" style={{ marginBottom: 22 }}>
