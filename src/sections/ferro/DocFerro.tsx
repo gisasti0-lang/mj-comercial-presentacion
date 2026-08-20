@@ -3,6 +3,7 @@ import { SecHead, Aviso } from '../../components/ui'
 import { DOCS_FERRO, CATALOGO_PAGINAS, CATALOGOS_LAMINA } from '../../data/documentos'
 import { CG35, BOGIE } from '../../data/ferrocarriles'
 import { useApp } from '../../store'
+import { ruta } from '../../data/ruta'
 
 /** Catálogo institucional: hojeador de las 36 páginas. */
 function Catalogo() {
@@ -15,7 +16,7 @@ function Catalogo() {
       <div>
         <div className="lamina" onClick={() => abrirDoc(p.id)} role="button" tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && abrirDoc(p.id)} style={{ background: '#0e1114' }}>
-          <img src={p.archivo} alt={p.titulo} />
+          <img src={ruta(p.archivo)} alt={p.titulo} />
           <div className="lamina-btn"><span>EXPANDIR</span></div>
         </div>
         <div className="lamina-cap">
@@ -40,7 +41,7 @@ function Catalogo() {
               border: i === pagina ? '1px solid var(--acento)' : '1px solid var(--linea)',
               padding: 0, lineHeight: 0, background: '#0e1114', position: 'relative',
             }}>
-            <img src={x.archivo} alt={`Página ${i + 1}`} loading="lazy" style={{ width: '100%', opacity: i === pagina ? 1 : .62 }} />
+            <img src={ruta(x.archivo)} alt={`Página ${i + 1}`} loading="lazy" style={{ width: '100%', opacity: i === pagina ? 1 : .62 }} />
             <span className="mono" style={{
               position: 'absolute', right: 4, bottom: 3, fontSize: '.5rem',
               color: i === pagina ? 'var(--acento)' : '#6c7278',
@@ -76,7 +77,7 @@ export default function DocFerro() {
             <figure key={c.id}>
               <div className="lamina" onClick={() => abrirDoc(c.id)} role="button" tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && abrirDoc(c.id)}>
-                <img src={c.archivo} alt={c.titulo} loading="lazy" />
+                <img src={ruta(c.archivo)} alt={c.titulo} loading="lazy" />
                 <div className="lamina-btn"><span>EXPANDIR</span></div>
               </div>
               <figcaption className="lamina-cap">

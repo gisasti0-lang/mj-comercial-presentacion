@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useApp } from '../store'
 import { docPorId } from '../data/documentos'
+import { ruta } from '../data/ruta'
 
 export default function DocModal() {
   const doc = useApp((s) => s.doc)
@@ -28,12 +29,12 @@ export default function DocModal() {
           <button className="btn" onClick={() => setZoom((z) => Math.max(0.5, z - 0.35))}>−</button>
           <button className="btn" onClick={() => setZoom(1)}>AJUSTAR</button>
           <button className="btn" onClick={() => setZoom((z) => Math.min(5, z + 0.35))}>+</button>
-          <a className="btn" href={d.archivo} target="_blank" rel="noreferrer">ABRIR</a>
+          <a className="btn" href={ruta(d.archivo)} target="_blank" rel="noreferrer">ABRIR</a>
           <button className="btn" onClick={() => abrirDoc(null)}>CERRAR ✕</button>
         </div>
       </div>
       <div className="modal-b">
-        <img src={d.archivo} alt={d.titulo}
+        <img src={ruta(d.archivo)} alt={d.titulo}
           style={{ width: `${zoom * 100}%`, maxWidth: zoom === 1 ? '100%' : 'none', height: 'auto' }} />
       </div>
     </div>

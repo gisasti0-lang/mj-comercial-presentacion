@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import type { Fuente } from '../data/project'
 import { docPorId } from '../data/documentos'
 import { useApp } from '../store'
+import { ruta } from '../data/ruta'
 
 export function Src({ f }: { f: Fuente }) {
   const map: Record<Fuente, string> = {
@@ -52,7 +53,7 @@ export function Lamina({ id, alto }: { id: string; alto?: number }) {
     <figure>
       <div className="lamina" onClick={() => abrirDoc(id)} role="button" tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && abrirDoc(id)}>
-        <img src={d.archivo} alt={d.titulo} loading="lazy"
+        <img src={ruta(d.archivo)} alt={d.titulo} loading="lazy"
           style={alto ? { height: alto, objectFit: 'cover', objectPosition: 'top' } : undefined} />
         <div className="lamina-btn"><span>EXPANDIR</span></div>
       </div>

@@ -4,6 +4,7 @@ import { useFerro } from '../../storeFerro'
 import { VAGONES_3D, FABRICADOS, PLANTA, TROCHAS } from '../../data/ferrocarriles'
 import { Src } from '../../components/ui'
 import ControlCorte from '../../components/ControlCorte'
+import { ruta } from '../../data/ruta'
 
 export default function Vagones() {
   const s = useFerro()
@@ -68,7 +69,7 @@ export default function Vagones() {
 
             <div className="grid g2" style={{ marginTop: 24, alignItems: 'start' }}>
               <figure>
-                <div className="lamina"><img src={v.imagen} alt={v.nombre} /></div>
+                <div className="lamina"><img src={ruta(v.imagen)} alt={v.nombre} /></div>
                 <figcaption className="lamina-cap"><span>{v.nombre.toUpperCase()}</span></figcaption>
               </figure>
               <div>
