@@ -12,7 +12,7 @@ function Catalogo() {
   const p = CATALOGO_PAGINAS[pagina]
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(210px,.26fr)', gap: 20, alignItems: 'start' }}>
+    <div className="dos-col">
       <div>
         <div className="lamina" onClick={() => abrirDoc(p.id)} role="button" tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && abrirDoc(p.id)} style={{ background: '#0e1114' }}>

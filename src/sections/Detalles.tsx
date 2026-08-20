@@ -28,8 +28,7 @@ export default function Detalles() {
                 <Aviso titulo="POR DEFINIR">{d.nota}</Aviso>
               </div>
             ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1.15fr) minmax(240px,.85fr)', gap: 22, padding: 20 }}
-                className="det-grid">
+              <div className="dos-col" style={{ padding: 20 }}>
                 <Lamina id={d.doc} />
                 <div>
                   <div className="eyebrow" style={{ marginBottom: 9 }}>COMPOSICIÓN</div>

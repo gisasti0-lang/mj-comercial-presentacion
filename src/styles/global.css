@@ -51,6 +51,8 @@ p{color:#b9c0c6;max-width:64ch}
 .linea-btn.on .l{color:var(--acento)}
 .linea-btn.on .s{color:var(--tenue)}
 
+.nav-toggle{display:none}
+.nav-cuerpo{display:contents}
 .nav-lista{flex:1;padding:8px 0;overflow-y:auto}
 .nav-item{
   width:100%;display:flex;gap:11px;align-items:baseline;padding:9px 20px;
@@ -350,24 +352,88 @@ p{color:#b9c0c6;max-width:64ch}
 @media(max-width:900px){
   :root{--nav:0px}
   .app{flex-direction:column}
-  .nav{width:100%;flex:0 0 auto;border-right:none;border-bottom:1px solid var(--linea);
-    flex-direction:row;align-items:center;overflow-x:auto}
-  .nav-marca{border-bottom:none;border-right:1px solid var(--linea);padding:12px 16px;flex:0 0 auto}
+
+  /* La barra queda fija arriba; la lista se despliega a pantalla completa. */
+  .nav{width:100%;flex:0 0 auto;flex-direction:row;align-items:stretch;
+    border-right:none;border-bottom:1px solid var(--linea);
+    position:sticky;top:0;z-index:60;background:var(--carbon);overflow:visible}
+  .nav-marca{border-bottom:none;border-right:1px solid var(--linea);
+    padding:9px 14px;flex:0 0 auto;width:auto!important}
   .nav-marca .s{display:none}
-  .lineas{flex-direction:row;border-bottom:none;border-right:1px solid var(--linea);flex:0 0 auto}
-  .linea-btn{border-left:none;border-bottom:2px solid transparent;padding:10px 14px}
+  .nav-marca .volver{font-size:.54rem}
+  .nav-marca .t{font-size:.78rem}
+
+  .nav-toggle{display:flex;flex:1;align-items:center;justify-content:space-between;
+    gap:10px;padding:9px 14px;min-height:52px}
+  .nav-toggle .et{display:flex;align-items:center;gap:9px;min-width:0}
+  .nav-toggle .n{font-family:var(--mono);font-size:.6rem;color:var(--acento)}
+  .nav-toggle .l{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+    color:var(--hormigon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-toggle .ic{font-size:1.05rem;color:var(--tenue);flex:0 0 auto}
+
+  .nav-cuerpo{display:none;position:fixed;left:0;right:0;top:52px;bottom:0;
+    background:var(--carbon);border-top:1px solid var(--linea);
+    flex-direction:column;overflow-y:auto;z-index:59}
+  .nav.abierto .nav-cuerpo{display:flex}
+
+  .lineas{flex-direction:row;border-bottom:1px solid var(--linea);flex:0 0 auto}
+  .linea-btn{flex:1;border-left:none;border-bottom:2px solid transparent;padding:14px 12px}
   .linea-btn .s{display:none}
   .linea-btn.on{border-left-color:transparent;border-bottom-color:var(--acento);background:none}
-  .nav-lista{display:flex;padding:0;flex:1}
-  .nav-item{flex-direction:column;gap:2px;padding:11px 15px;border-left:none;border-bottom:2px solid transparent}
-  .nav-item.on{border-left-color:transparent;border-bottom-color:var(--acento);background:none}
-  .nav-item .l{font-size:.62rem;letter-spacing:.08em}
-  .nav-pie{display:none}
-  .wrap,.wrap-ancho{padding:34px 20px 70px}
-  .portada-cont{padding:0 22px 34px}
-  .ctrl{width:min(210px,52vw);top:12px;left:12px;max-height:46%}
-  .info{width:min(260px,66vw);right:12px;bottom:12px}
-  .modos{top:12px;right:12px}
+
+  .nav-lista{display:flex;flex-direction:column;padding:6px 0;flex:1}
+  .nav-item{flex-direction:row;align-items:center;gap:12px;padding:15px 20px;
+    border-left:3px solid transparent;border-bottom:1px solid var(--linea-2)}
+  .nav-item .l{font-size:.76rem;letter-spacing:.1em}
+  .nav-pie{display:block;padding:14px 20px 22px}
+
+  .wrap,.wrap-ancho{padding:26px 18px 64px}
+  .portada-cont{padding:0 18px 30px}
+  .sec-head{flex-direction:column;gap:8px}
+
+  /* Grillas a una sola columna. */
+  .grid,.g2,.g3{grid-template-columns:1fr}
+  .entrada-grid{grid-template-columns:1fr}
+
+  /* Los laterales pegajosos estorban en vertical. */
+  aside[style]{position:static!important;top:auto!important}
+
+  /* Visor 3D: los paneles no pueden taparse entre sí. */
+  .ctrl{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;max-height:44vh;
+    border-left:none;border-right:none;border-bottom:none;z-index:40}
+  .info{position:fixed;left:8px;right:8px;bottom:auto;top:62px;width:auto;z-index:41}
+  .modos{top:8px;right:8px;transform:scale(.86);transform-origin:top right}
+  .visor-tit{top:10px;left:12px;right:auto;text-align:left;transform:none}
   .brujula{display:none}
-  .sec-head{flex-direction:column;gap:10px}
+  .pres-barra{left:8px;right:8px;bottom:8px;transform:none;flex-wrap:wrap}
+
+  .lamina{overflow-x:auto}
+}
+
+/* Diseños de dos columnas: se apilan cuando no entran. */
+.dos-col{display:grid;gap:26px;align-items:start;
+  grid-template-columns:minmax(0,1fr) minmax(270px,.38fr)}
+.dos-col.invertida{grid-template-columns:minmax(260px,.42fr) minmax(0,1fr)}
+@media(max-width:1000px){
+  .dos-col,.dos-col.invertida{grid-template-columns:1fr}
+  .dos-col.invertida>*:first-child{order:2}
+}
+
+/* Cifras: tantas columnas como entren. */
+.cifras{display:grid;gap:14px;margin:40px 0 36px;max-width:860px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+/* Teléfonos angostos */
+@media(max-width:430px){
+  .wrap,.wrap-ancho{padding:22px 14px 60px}
+  .nav-marca,.nav-toggle{padding:9px 11px}
+  .btn{padding:9px 11px;font-size:.6rem}
+  .ficha-b{padding:11px 12px}
+  h1{font-size:clamp(1.8rem,8.6vw,2.4rem)}
+}
+
+/* En pantallas táctiles no hay hover: los controles se ven siempre. */
+@media(hover:none){
+  .lamina-btn{opacity:1;background:linear-gradient(0deg,rgba(11,13,15,.85),transparent 62%)}
+  .card:hover{transform:none}
 }

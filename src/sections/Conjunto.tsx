@@ -16,8 +16,7 @@ export default function Conjunto() {
       <SecHead n="03" titulo="Conjunto"
         bajada="El edificio completo: modelo tridimensional, planta interactiva y cortes de la documentación." />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1.25fr) minmax(320px,.85fr)', gap: 30, alignItems: 'start' }}
-        className="conjunto-grid">
+      <div className="dos-col conjunto-grid" style={{ gap: 30 }}>
         <div>
           {/* ancla del visor 3D global */}
           <div id="visor-anchor" style={{ width: '100%', aspectRatio: '16/11', border: '1px solid var(--linea)', background: '#0e1114' }} />

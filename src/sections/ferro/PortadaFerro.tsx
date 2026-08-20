@@ -21,7 +21,7 @@ export default function PortadaFerro() {
             interactiva con modelo tridimensional del bogie tipo 1676.
           </p>
 
-          <div className="grid" style={{ gridTemplateColumns: 'repeat(4,1fr)', gap: 14, margin: '40px 0 36px', maxWidth: 860 }}>
+          <div className="cifras">
             {CAPACIDAD.map((c) => (
               <div className="ficha" key={c.k}>
                 <div className="ficha-b">

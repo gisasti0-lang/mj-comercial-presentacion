@@ -30,7 +30,7 @@ export default function Vagones() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,.38fr)', gap: 22, alignItems: 'start' }}>
+        <div className="dos-col">
           <div>
             <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', border: '1px solid var(--linea)', background: '#0e1114' }}>
               <VisorVagon />

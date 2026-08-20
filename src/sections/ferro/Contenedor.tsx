@@ -67,7 +67,7 @@ export default function Contenedor() {
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(260px,.36fr)', gap: 26, alignItems: 'start' }}>
+      <div className="dos-col">
         <div className="grid g2" style={{ alignItems: 'start' }}>
           <Lamina id="cg35-elev-lat" />
           <Lamina id="cg35-elev-front" />

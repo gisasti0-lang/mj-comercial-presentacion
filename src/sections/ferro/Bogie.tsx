@@ -49,7 +49,7 @@ export default function Bogie() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,.42fr)', gap: 28, alignItems: 'start' }}>
+      <div className="dos-col">
         <div>
           <div className="grid g2" style={{ alignItems: 'start', marginBottom: 26 }}>
             <Ficha titulo="DATOS GENERALES">

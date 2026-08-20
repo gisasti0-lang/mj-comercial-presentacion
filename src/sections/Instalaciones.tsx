@@ -98,7 +98,7 @@ export default function Instalaciones() {
         </Aviso>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(260px,.42fr) minmax(0,1fr)', gap: 26, alignItems: 'start' }}>
+      <div className="dos-col invertida">
         <div>
           <div className="ficha">
             <div className="ficha-h"><span className="t">INSTALACIONES</span></div>
